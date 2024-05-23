@@ -88,7 +88,7 @@ void AMovementRecorder::SpawnGhostAtStartingPosition()
     APlayerController* PlayerController = GetWorld()->GetFirstPlayerController();
     if (PlayerController && GhostCharacterClass)
     {
-        FVector SpawnLocation = Cast<AMyCharacter>(PlayerController->GetCharacter())->StartPos+FVector(0,200,0);
+        FVector SpawnLocation = Cast<AMyCharacter>(PlayerController->GetCharacter())->StartPos;;
 
         FTransform SpawnTransform(SpawnLocation);
         GhostCharacter = GetWorld()->SpawnActor<AMyCharacter>(GhostCharacterClass, SpawnTransform);
@@ -133,8 +133,8 @@ void AMovementRecorder::ApplyNextInputRecord()
         if (PlaybackIndex >= PlaybackInputs.Num())
         {
             GetWorldTimerManager().ClearTimer(PlaybackTimerHandle);
-            //FVector NewLocation = GhostCharacter->GetActorLocation() +  GhostCharacter->GetActorForwardVector() * 120;
-            //GhostCharacter->SetActorLocation(NewLocation);
+            FVector NewLocation = GhostCharacter->GetActorLocation() +  GhostCharacter->GetActorForwardVector() * 50;
+            GhostCharacter->SetActorLocation(NewLocation);
             DestroyGhostActor();
         }
     }
